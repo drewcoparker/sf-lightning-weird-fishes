@@ -1,3 +1,5 @@
-<aura:component >
-	
+<aura:component implements="force:appHostable" controller="contactController">
+
+    <div class="slds-page-header"></div>
+
 </aura:component>
