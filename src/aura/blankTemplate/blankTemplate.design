@@ -1,0 +1,5 @@
+<design:component label="Full inner window, no header or columns">
+    <flexipage:template >
+        <flexipage:region name="inner" defaultWidth="Xlarge" />
+    </flexipage:template>
+</design:component>

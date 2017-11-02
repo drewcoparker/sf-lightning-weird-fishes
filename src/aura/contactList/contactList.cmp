@@ -1,5 +1,5 @@
-<aura:component implements="force:appHostable" controller="contactController">
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="contactController">
 
-    <div class="slds-page-header"></div>
+    <div class="slds-page-header">Hello</div>
 
 </aura:component>
