@@ -5,6 +5,7 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>blankTemplate</members>
         <members>contactList</members>
         <members>contacts</members>
         <name>AuraDefinitionBundle</name>

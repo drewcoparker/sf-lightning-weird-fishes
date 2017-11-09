@@ -1,0 +1,6 @@
+<aura:component implements="lightning:appHomeTemplate">
+    <aura:attribute name="inner" type="Aura.Component[]" />
+    <div class="weird-template">
+        {!v.inner}
+    </div>
+</aura:component>
