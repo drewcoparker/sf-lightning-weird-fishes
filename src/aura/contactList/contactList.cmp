@@ -1,14 +1,92 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" controller="contactController">
 
-    <div class="slds">
-        <div class="slds-page-header slds-page-header_object-home" style="border-radius:0;">
-            <div class="slds-media">
-                <div class="slds-media__figure">
-                    <lightning:icon iconName="standard:service_resource" size="medium" variant="error"/>
-                </div>
-                <div class="slds-media__body">
-                    <p class="slds-text-title_caps slds-text-body_small slds-line-height_reset">Weird Contacts</p>
-                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Weird, shitty people">Weird, Shitty People I Know</h1>
+    <ltng:require scripts="{!$Resource.jQuery}" afterScriptsLoaded="{!c.scriptLoaded}" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.dataGetter}"/>
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRender}"/> -->
+
+    <aura:attribute name="contacts" type="Object[]"/>
+    <aura:attribute name="contactProperties" type="String[]"/>
+    <aura:attribute name="count" type="Integer"/>
+    <aura:attribute name="currentUser" type="String" default=""/>
+    <aura:attribute name="possessive" type="String" default="'s"/>
+    <aura:attribute name="isjQueryLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="headersNeedWidths" type="Boolean" default="true"/>
+    <aura:attribute name="fireCount" type="Integer" default="0"/>
+
+    <aura:attribute name="mouseStart" type="string" />
+    <aura:attribute name="oldWidth" type="string" />
+
+    <div class="slds-page-header slds-page-header_object-home" style="border-radius:0;">
+        <div class="slds-media">
+            <div class="slds-media__figure slds-p-top_xxx-small">
+                <lightning:icon iconName="standard:service_resource" size="medium" variant="error"/>
+            </div>
+            <div class="slds-media__body">
+                <p class="slds-text-title_caps slds-text-body_x-small slds-line-height_reset">{!v.currentUser ? v.currentUser + v.possessive : 'Weird'} Contacts</p>
+                <h3 class="slds-page-header__title slds-truncate slds-align-middle slds-p-top_xxx-small"
+                    title="Weird, shitty people">Weird, Shitty People I Know</h3>
+            </div>
+        </div>
+        <div class="slds-align-middle slds-p-top_xxx-small">
+            <p class="slds-text-body_small">
+                <span class="slds-badge">{!v.count}</span>
+                <span>contacts</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- <aura:iteration items="{!v.contacts}" indexVar="index" var="contact">
+        <div>
+            <c:contacts contact="{!contact}"/>
+        </div>
+    </aura:iteration> -->
+
+    <!-- A table example -->
+    <div class="outer-table-container" style="margin-left:auto;margin-right:auto;margin-top:2rem;max-width:1100px;">
+        <div class="slds-is-relative" style="border:solid 1px rgb(217, 219, 221);">
+            <div id="contacts-table-container" class="slds-table_header-fixed_container">
+                <div id="scroller" class="slds-scrollable_y" style="height:500px;">
+                    <table id="contacts-table-el" class="slds-table slds-table_header-fixed slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-table_striped">
+                        <thead>
+                            <tr class="slds-is-resizable slds-text-title_caps">
+                                <th class="slds-cell-shrink"></th>
+                                <!-- Iterate over the contact properties -->
+                                <aura:iteration items="{!v.contactProperties}" indexVar="headerIndex" var="property">
+                                    <th id="{! 'th-' + headerIndex}" class="header-cell" scope="col">
+                                        <div id="{! 'fixed-cell-' + headerIndex}" class="slds-cell-fixed" title="{!property}">
+                                            <div class="slds-th__action">
+                                                <span class="slds-truncate">{!property}</span>
+                                            </div>
+
+                                            <!-- Resizable columns -->
+                                            <div class="slds-resizable">
+                                                <input id="{! 'resize-handle-' + headerIndex}" class="slds-resizable__input slds-assistive-text" type="range" min="60" max="1000" />
+                                                    <span id="{! 'handle-' + headerIndex}" class="slds-resizable__handle" onmousedown="{!c.mouseDownResizer}">
+                                                    <span class="slds-resizable__divider"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </aura:iteration>
+                                <!-- <th class="slds-cell-shrink"></th> -->
+                            </tr>
+                        </thead>
+                        <!-- Body -->
+                        <tbody id="tableBody">
+                            <aura:iteration items="{!v.contacts}" indexVar="bodyIndex" var="contact">
+                                <tr>
+                                    <th scope="row"><div class="slds-truncate">{!bodyIndex + 1}</div></th>
+                                    <td><div class="slds-truncate" title="{!contact.id}">{!contact.id}</div></td>
+                                    <td><div class="slds-truncate" title="{!contact.name}">{!contact.name}</div></td>
+                                    <td><div class="slds-truncate" title="{!contact.email}">{!contact.email}</div></td>
+                                    <td><div class="slds-truncate" title="{!contact.phone}">{!contact.phone}</div></td>
+                                    <td><div class="slds-truncate" title="{!contact.address}">{!contact.address}</div></td>
+                                    <td><div class="slds-truncate" title="{!contact.lead}">{!contact.lead}</div></td>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

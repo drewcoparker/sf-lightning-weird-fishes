@@ -1,6 +1,12 @@
 public with sharing class contactController {
+
     @AuraEnabled
-    public static List<Contact> getContacts() {
+    public static String getUserName() {
+        return userInfo.getName();
+    }
+
+    @AuraEnabled
+    public static List<ContactMsg> getContacts() {
         List<Contact> contacts = [
             SELECT Id,
                    Name,
@@ -10,6 +16,11 @@ public with sharing class contactController {
                    LeadSource
             FROM Contact
         ];
-        return contacts;
+
+        List<ContactMsg> msgList = new List<ContactMsg>();
+        for(Contact c:contacts){
+            msgList.add(new ContactMsg(c));
+        }
+        return msgList;
     }
 }

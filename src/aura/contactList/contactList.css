@@ -1,2 +1,24 @@
-.THIS {
+.THIS #contact-table {
+    margin: auto;
+    max-width: 900px;
 }
+
+.THIS .slds-cell-fixed, .THIS .slds-table_header-fixed_container {
+    background-color: #fafaf9 !important;
+}
+
+.THIS .slds-th__action:focus, .THIS .slds-th__action:hover {
+    background-color: #fff !important;
+}
+
+.THIS .header-cell {
+    min-width: 50px;
+}
+
+/* .THIS ::-webkit-scrollbar-track {
+    display: none;
+} */
+
+/* .THIS #contacts-table-container {
+    padding-right: 15px;
+} */

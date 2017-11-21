@@ -1,0 +1,23 @@
+<aura:component >
+
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+<aura:attribute name="contacts" type="Object[]"/>
+<aura:attribute name="contactProperties" type="String[]"/>
+
+<div class="slds">
+    <div class="slds-table_header-fixed-container">
+        <div id="scroller" class="slds-scrollable_y">
+
+            <table class="slds-table slds-table_header-fixed slds-table_bordered slds-table_resizable-cols slds-table_fixed-layout slds-no-row-hover slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-is-resizable slds-test-title_caps">
+                        <th class="slds-cell-shrink"></th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+</aura:component>
