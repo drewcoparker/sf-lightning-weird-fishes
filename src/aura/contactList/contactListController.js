@@ -48,16 +48,17 @@
         }
 
         // Create a reference to this th with jQuery
-        var thisThId = parObj.id;
-        var thisTh = '#contacts-table-container th#' + thisThId;
-        var $thisTh = $(thisTh);
+        var $thisTh = $(parObj);
 
         // Attach a bound mousemove event listener
         $(document).on("mousemove.resizer", function(event) {
+            event.preventDefault();
             var newWidth = $thisTh.width() + (event.clientX - startX);
-            $thisTh.width(newWidth);
-            $thisTh.children('div.slds-cell-fixed').width(newWidth);
-            startX = event.clientX;
+            if (newWidth > 50) {
+                $thisTh.width(newWidth);
+                $thisTh.children('div.slds-cell-fixed').width(newWidth);
+                startX = event.clientX;
+            }
         });
 
         // Mouseup listener calls computeHeaderWidths so all header cells are updated

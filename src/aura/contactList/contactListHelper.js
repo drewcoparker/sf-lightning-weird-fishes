@@ -7,7 +7,7 @@
             var $this = $(this);
             var width = $this.width();
             $this.children('div.slds-cell-fixed').width(width);
-            // $this.width(width);
+            $this.width(width);
         })
         count += 1;
         component.set("v.fireCount", count);
